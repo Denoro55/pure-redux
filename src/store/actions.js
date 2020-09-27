@@ -8,8 +8,9 @@ export const Constants = {
 };
 
 // Counter
-export const counterInc = () => ({
-    type: Constants.COUNTER_INC
+export const counterInc = (value) => ({
+    type: Constants.COUNTER_INC,
+    payload: value
 });
 
 export const counterDec = () => ({
@@ -30,7 +31,8 @@ const fetchUsersFailure = () => ({
     type: 'FETCH_USERS_FAILURE'
 });
 
-export const fetchUsers = () => (dispatch) => {
+export const fetchUsers = (value) => (dispatch, getState) => {
+    console.log('thunk values: ', value, getState());
     dispatch(fetchUsersRequest());
 
     fetch('https://jsonplaceholder.typicode.com/users')

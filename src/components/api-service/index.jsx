@@ -1,12 +1,13 @@
 import React from 'react';
 import connect from '../../store/core/connect';
 import * as actions from '../../store/actions';
+import bindActionCreators from '../../store/core/bindActionCreators';
 
 function ApiService(props) {
     return (
         <div>
             <div>
-                <button onClick={props.makeRequest}>
+                <button onClick={() => props.makeRequest(5)}>
                     Make Request
                 </button>
             </div>
@@ -28,7 +29,11 @@ export default connect((state) => {
         users: state.users
     }
 }, (dispatch) => {
-    return {
-        makeRequest: () => dispatch(actions.fetchUsers())
-    }
+    return bindActionCreators({
+        makeRequest: actions.fetchUsers
+    }, dispatch)
+
+    // return {
+    //     makeRequest: () => dispatch(actions.fetchUsers(5))
+    // }
 })(ApiService);

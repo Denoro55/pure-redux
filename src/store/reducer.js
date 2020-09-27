@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
         case Constants.COUNTER_INC:
             return {
                 ...state,
-                counter: state.counter + 1
+                counter: state.counter + action.payload
             };
         case Constants.COUNTER_DEC:
             return {
