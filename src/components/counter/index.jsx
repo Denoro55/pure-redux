@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import connect from '../../store/core/connect';
-import {actionCounterInc} from '../../store/actions';
+import * as actions from '../../store/actions';
 
 function Counter(props) {
-    const { value } = props;
+    const { value, inc } = props;
     console.log('render Counter, props: ', props);
 
     return (
@@ -12,7 +12,7 @@ function Counter(props) {
                 Counter {value}
             </div>
             <div>
-                <button onClick={props.inc}>
+                <button onClick={inc}>
                     +
                 </button>
             </div>
@@ -27,6 +27,6 @@ export default connect((state) => {
     }
 }, (dispatch) => {
     return {
-        inc: () => dispatch(actionCounterInc())
+        inc: () => dispatch(actions.counterInc())
     }
 })(Counter);

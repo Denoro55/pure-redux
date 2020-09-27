@@ -7,11 +7,11 @@ const validateAction = action => {
     }
 };
 
-const createStore = (reducer) => {
+const createStore = (reducer, middleware) => {
     let state = reducer(undefined, {type: '@@redux/INIT'});
     let listeners = [];
 
-    return {
+    const store = {
         dispatch: (action) => {
             validateAction(action);
             state = reducer(state, action);
@@ -25,7 +25,17 @@ const createStore = (reducer) => {
             }
         },
         getState: () => state
+    };
+
+    if (middleware) {
+        const dispatch = (action) => store.dispatch(action);
+        store.dispatch = middleware({
+            dispatch,
+            getState: store.getState
+        })(store.dispatch)
     }
+
+    return store;
 };
 
 export default createStore

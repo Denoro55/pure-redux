@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Counter from './components/Counter';
+import Counter from './components/counter';
+import ApiService from './components/api-service';
 
 function App(props) {
     console.log('App props ', props);
@@ -8,6 +9,8 @@ function App(props) {
     return (
         <div className="App">
             <Counter />
+            <hr/>
+            <ApiService />
         </div>
     );
 }

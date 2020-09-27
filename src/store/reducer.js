@@ -2,7 +2,7 @@ import {Constants} from './actions';
 
 const initialState = {
     counter: 1,
-    tasks: []
+    users: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +16,15 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 counter: state.counter - 1
+            };
+
+        case Constants.FETCH_USERS:
+        case Constants.FETCH_USERS_FAILURE:
+            return state;
+        case Constants.FETCH_USERS_SUCCESS:
+            return {
+                ...state,
+                users: action.payload
             };
         default:
             return state
